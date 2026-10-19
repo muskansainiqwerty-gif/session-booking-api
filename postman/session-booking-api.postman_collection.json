@@ -27,6 +27,10 @@
     {
       "key": "otherSessionId",
       "value": ""
+    },
+    {
+      "key": "userEmail",
+      "value": ""
     }
   ],
   "item": [
@@ -54,6 +58,15 @@
                   "pm.test('status is 201', () => pm.response.to.have.status(201));"
                 ]
               }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.collectionVariables.set('userEmail', 'asha.' + Date.now() + '@example.com');"
+                ]
+              }
             }
           ],
           "request": {
@@ -75,7 +88,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"fullName\": \"Asha Verma\",\n  \"email\": \"asha.{{$timestamp}}@example.com\",\n  \"phone\": \"9876543210\"\n}",
+              "raw": "{\n  \"fullName\": \"Asha Verma\",\n  \"email\": \"{{userEmail}}\",\n  \"phone\": \"9876543210\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -407,7 +420,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"fullName\": \"Asha Verma\",\n  \"email\": \"dup@example.com\",\n  \"phone\": \"9876543210\"\n}",
+              "raw": "{\n  \"fullName\": \"Asha Verma\",\n  \"email\": \"{{userEmail}}\",\n  \"phone\": \"9876543210\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
